@@ -20,9 +20,6 @@
 
 BEGIN_NS_EDGE
 namespace assert {
-
-
-
 	//====================
 	// AssertHandler
 	//====================
