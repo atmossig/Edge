@@ -15,6 +15,9 @@
     <ClInclude Include="Source\Core\EdgeAssert.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Core\EdgeGeometryProcessing.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\Main.cpp">
@@ -24,6 +27,9 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\Core\EdgeAssert.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\EdgeGeometryProcessing.cpp">
       <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
