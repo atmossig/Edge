@@ -18,12 +18,20 @@
  * - Set up common preprocessor toggles for features like profiling.
  */
 
-#ifndef EDGE_CORE_H_
-#define EDGE_CORE_H_
+#ifndef INC_EDGE_CORE_
+#define INC_EDGE_CORE_
 
  // This pragma is useful for ensuring the header is included only once,
  // though the header guard is the standard mechanism.
 #pragma once
+
+//==================================================================================================
+// 0. CORE
+// 
+// Core, top-level things, e.g., namespace.
+//==================================================================================================
+#define BEGIN_NS_EDGE namespace edge {
+#define END_NS_EDGE }
 
 //==================================================================================================
 // 1. PROJECT-SPECIFIC PREPROCESSOR TOGGLES
@@ -350,4 +358,4 @@
 #endif
 
 
-#endif // EDGE_CORE_H_
+#endif // INC_EDGE_CORE_
