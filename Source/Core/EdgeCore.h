@@ -18,11 +18,11 @@
  * - Set up common preprocessor toggles for features like profiling.
  */
 
+#include "EdgeAssert.h"
+
 #ifndef INC_EDGE_CORE_
 #define INC_EDGE_CORE_
 
- // This pragma is useful for ensuring the header is included only once,
- // though the header guard is the standard mechanism.
 #pragma once
 
 //==================================================================================================

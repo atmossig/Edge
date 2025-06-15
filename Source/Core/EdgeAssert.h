@@ -50,33 +50,30 @@ using AssertCallbackFn = std::function<void(const AssertInfo&)>;
 // Assert handler class - allows for custom assertion behavior
 class AssertHandler {
 public:
-    static AssertHandler& Get();
+	static AssertHandler& Get();
 
-    // Register a custom handler
-    void SetCallback(AssertCallbackFn callback);
+	// Register a custom handler
+	void SetCallback(AssertCallbackFn callback);
 
-    // Reset to default handler
-    void ResetCallback();
+	// Reset to default handler
+	void ResetCallback();
 
-    // Handle an assertion
-    bool HandleAssert(const AssertInfo& info);
+	// Handle an assertion
+	bool HandleAssert(const AssertInfo& info);
 
 private:
-    AssertHandler() = default;
-    AssertCallbackFn m_Callback;
+	AssertHandler() = default;
+	AssertCallbackFn m_Callback;
 
-    // Default handler behavior
-    bool DefaultHandler(const AssertInfo& info);
+	// Default handler behavior
+	bool DefaultHandler(const AssertInfo& info);
 };
 
-// Utility functions for formatting
-namespace Assert {
-    // Format an assertion message
-    std::string FormatMessage(const AssertInfo& info);
+// Format an assertion message
+std::string FormatAssertMessage(const AssertInfo& info);
 
-    // Break into the debugger if available
-    void DebugBreak();
-}
+// Break into the debugger if available
+void DebugBreak();
 
 END_NS_EDGE
 
@@ -86,43 +83,43 @@ END_NS_EDGE
 
 // Core assert implementation - do not use directly, use the macros below
 #define EDGE_ASSERT_IMPL(condition, level, message, ...) \
-    do { \
-        if (!(condition)) { \
-            edge::AssertInfo info { \
-                #condition, \
-                message, \
-                __FILE__, \
-                __LINE__, \
-                level \
-            }; \
-            if (edge::AssertHandler::Get().HandleAssert(info)) { \
-                edge::Assert::DebugBreak(); \
-            } \
-        } \
-    } while(0)
+	do { \
+		if (!(condition)) { \
+			edge::AssertInfo info { \
+				#condition, \
+				message, \
+				__FILE__, \
+				__LINE__, \
+				level \
+			}; \
+			if (edge::AssertHandler::Get().HandleAssert(info)) { \
+				edge::Assert::DebugBreak(); \
+			} \
+		} \
+	} while(0)
 
 // Main assertion macro - breaks in debug mode if condition is false
 #if EDGE_DEBUG
 #define EDGE_ASSERT(condition, message, ...) \
-        EDGE_ASSERT_IMPL(condition, edge::AssertLevel::Error, message, ##__VA_ARGS__)
+		EDGE_ASSERT_IMPL(condition, edge::AssertLevel::Error, message, ##__VA_ARGS__)
 #else
 #define EDGE_ASSERT(condition, message, ...) ((void)0)
 #endif
 
 // Always evaluated assertion - useful for checking return values
 #define EDGE_VERIFY(condition, message, ...) \
-    EDGE_ASSERT_IMPL(condition, edge::AssertLevel::Error, message, ##__VA_ARGS__)
+	EDGE_ASSERT_IMPL(condition, edge::AssertLevel::Error, message, ##__VA_ARGS__)
 
 // Fatal assertion - always breaks, even in release builds
 #define EDGE_ASSERT_FATAL(condition, message, ...) \
-    EDGE_ASSERT_IMPL(condition, edge::AssertLevel::Fatal, message, ##__VA_ARGS__)
+	EDGE_ASSERT_IMPL(condition, edge::AssertLevel::Fatal, message, ##__VA_ARGS__)
 
 // Warning assertion - logs but doesn't break
 #define EDGE_ASSERT_WARN(condition, message, ...) \
-    EDGE_ASSERT_IMPL(condition, edge::AssertLevel::Warning, message, ##__VA_ARGS__)
+	EDGE_ASSERT_IMPL(condition, edge::AssertLevel::Warning, message, ##__VA_ARGS__)
 
 // Message - always displays a message but never breaks
 #define EDGE_ASSERT_MESSAGE(message, ...) \
-    EDGE_ASSERT_IMPL(true, edge::AssertLevel::Info, message, ##__VA_ARGS__)
+	EDGE_ASSERT_IMPL(true, edge::AssertLevel::Info, message, ##__VA_ARGS__)
 
 #endif // INC_EDGE_CORE_ASSERT_
