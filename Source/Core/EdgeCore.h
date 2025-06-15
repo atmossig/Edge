@@ -33,6 +33,15 @@
 #define BEGIN_NS_EDGE namespace edge {
 #define END_NS_EDGE }
 
+#define BEGIN_NS_MEMORY namespace memory {
+#define END_NS_MEMORY }
+
+#define BEGIN_NS_GEOMETRY namespace geometry {
+#define END_NS_GEOMETRY }
+
+#define BEGIN_NS_ASSERT namespace assert {
+#define END_NS_ASSERT }
+
 //==================================================================================================
 // 1. PROJECT-SPECIFIC PREPROCESSOR TOGGLES
 // 

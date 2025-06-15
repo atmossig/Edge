@@ -22,61 +22,61 @@
 #include <functional>
 
 BEGIN_NS_EDGE
-namespace assert {
+BEGIN_NS_ASSERT
 
-	// Forward declarations
-	enum class AssertLevel;
-	struct AssertInfo;
-	class AssertHandler;
+// Forward declarations
+enum class AssertLevel;
+struct AssertInfo;
+class AssertHandler;
 
-	enum class AssertLevel {
-		Info,		// Info, doesn't break or do anything
-		Warning,	// Warning, continues execution
-		Error,		// Error, breaks in the debugger
-		Fatal		// Fatal, always breaks
-	};
+enum class AssertLevel {
+	Info,		// Info, doesn't break or do anything
+	Warning,	// Warning, continues execution
+	Error,		// Error, breaks in the debugger
+	Fatal		// Fatal, always breaks
+};
 
-	// Info about an assertion
-	struct AssertInfo {
-		const char* condition;			// Condition that failed the assertion
-		const char* message;			// Message for the assertion
-		const char* file;				// File where the assertion occurred
-		int line;						// Line number of the assertion
-		AssertLevel level;				// Severity level of the assertion
-	};
+// Info about an assertion
+struct AssertInfo {
+	const char* condition;			// Condition that failed the assertion
+	const char* message;			// Message for the assertion
+	const char* file;				// File where the assertion occurred
+	int line;						// Line number of the assertion
+	AssertLevel level;				// Severity level of the assertion
+};
 
-	// Function type for custom assert handlers
-	using AssertCallbackFn = std::function<void(const AssertInfo&)>;
+// Function type for custom assert handlers
+using AssertCallbackFn = std::function<void(const AssertInfo&)>;
 
-	// Assert handler class - allows for custom assertion behavior
-	class AssertHandler {
-	public:
-		static AssertHandler& Get();
+// Assert handler class - allows for custom assertion behavior
+class AssertHandler {
+public:
+	static AssertHandler& Get();
 
-		// Register a custom handler
-		void SetCallback(AssertCallbackFn callback);
+	// Register a custom handler
+	void SetCallback(AssertCallbackFn callback);
 
-		// Reset to default handler
-		void ResetCallback();
+	// Reset to default handler
+	void ResetCallback();
 
-		// Handle an assertion
-		bool HandleAssert(const AssertInfo& info);
+	// Handle an assertion
+	bool HandleAssert(const AssertInfo& info);
 
-	private:
-		AssertHandler() = default;
-		AssertCallbackFn m_Callback;
+private:
+	AssertHandler() = default;
+	AssertCallbackFn m_Callback;
 
-		// Default handler behavior
-		bool DefaultHandler(const AssertInfo& info);
-	};
+	// Default handler behavior
+	bool DefaultHandler(const AssertInfo& info);
+};
 
-	// Format an assertion message
-	std::string FormatAssertMessage(const AssertInfo& info);
+// Format an assertion message
+std::string FormatAssertMessage(const AssertInfo& info);
 
-	// Break into the debugger if available
-	void DebugBreak();
+// Break into the debugger if available
+void DebugBreak();
 
-} // namespace assert
+END_NS_ASSERT
 END_NS_EDGE
 
 //==================================================================================================
