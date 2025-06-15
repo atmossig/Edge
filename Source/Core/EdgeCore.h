@@ -339,23 +339,4 @@
 #define EDGE_ERROR(msg)   _Pragma(EDGE_STRINGIFY(GCC error msg))
 #endif
 
-
-// --- Assertion Macro ---
-#if EDGE_DEBUG
-	// In Debug builds, assertions are active.
-	// If the condition is false, a message is printed to the compiler output and the debugger is triggered.
-	// Example: EDGE_ASSERT(ptr != nullptr, "Pointer cannot be null!");
-#define EDGE_ASSERT(condition, ...) \
-		do { \
-			if (!(condition)) { \
-				EDGE_ERROR("Assertion Failed: " #condition); \
-				EDGE_DEBUGBREAK(); \
-			} \
-		} while(0)
-#else
-// In Release builds, assertions compile to nothing for maximum performance.
-#define EDGE_ASSERT(condition, ...) ((void)0)
-#endif
-
-
 #endif // INC_EDGE_CORE_

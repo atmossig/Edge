@@ -19,10 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Core\EdgeAssert.h" />
     <ClInclude Include="Source\Core\EdgeCore.h" />
     <ClInclude Include="Source\Core\EdgeMemory.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Core\EdgeAssert.cpp" />
     <ClCompile Include="Source\Core\EdgeMemory.cpp" />
     <ClCompile Include="Source\Core\Main.cpp" />
   </ItemGroup>
