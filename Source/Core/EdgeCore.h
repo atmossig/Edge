@@ -27,6 +27,7 @@
 
 //==================================================================================================
 // 1. PROJECT-SPECIFIC PREPROCESSOR TOGGLES
+// 
 // These are intended to be defined in the build system (e.g., via -DEDGE_PROFILE=1).
 // If they are not defined by the build system, they default to 0 (disabled).
 //==================================================================================================
@@ -60,7 +61,9 @@
 
 //==================================================================================================
 // 2. GLOBAL PROJECT CONFIGURATION
+// 
 // Define project-wide support for platforms, compilers, and C++ versions.
+// 
 // TO OVERRIDE: Define these in your build system's preprocessor definitions
 // before this file is included.
 //==================================================================================================
@@ -105,6 +108,7 @@
 
 //==================================================================================================
 // 3. COMPILER DETECTION
+// 
 // Defines: EDGE_COMPILER_MSVC, EDGE_COMPILER_CLANG, EDGE_COMPILER_GCC
 //          EDGE_COMPILER_VER_ (e.g., 1930 for MSVC 2022)
 //==================================================================================================
@@ -135,6 +139,7 @@
 
 //==================================================================================================
 // 4. PLATFORM & ARCHITECTURE DETECTION
+// 
 // Defines: EDGE_PLATFORM_WINDOWS, EDGE_PLATFORM_MACOS, EDGE_PLATFORM_IOS, EDGE_PLATFORM_ANDROID
 //          EDGE_ARCH_X64, EDGE_ARCH_ARM64
 //==================================================================================================
@@ -193,7 +198,9 @@
 
 //==================================================================================================
 // 5. GLOBAL SUPPORT VALIDATION
+// 
 // Checks if the current environment is supported by the project configuration.
+// 
 // Halts compilation if the current build environment is explicitly disabled.
 //==================================================================================================
 #if EDGE_COMPILER_MSVC && !EDGE_GLOBAL_MSVC_SUPPORTED
@@ -222,6 +229,7 @@
 
 //==================================================================================================
 // 6. C++ VERSION DETECTION
+// 
 // Defines: EDGE_CPP (e.g., 17, 20), EDGE_CPP_VERSION_LONG (e.g., 201703L)
 //          Flags for each version like EDGE_CPP17, EDGE_CPP2017, etc.
 //==================================================================================================
@@ -264,6 +272,7 @@
 
 //==================================================================================================
 // 7. C++ VERSION REQUIREMENT VALIDATION
+// 
 // Checks if the detected C++ version meets the project's global requirements.
 //==================================================================================================
 #if (EDGE_CPP_VERSION_LONG < EDGE_GLOBAL_CPP_MIN_VERSION)
@@ -281,6 +290,7 @@
 
 //==================================================================================================
 // 8. BUILD TYPE DETECTION
+// 
 // Defines: EDGE_DEBUG, EDGE_RELEASE
 //==================================================================================================
 #if defined(_DEBUG) || (defined(DEBUG) && !defined(NDEBUG))
@@ -327,7 +337,6 @@
 	// In Debug builds, assertions are active.
 	// If the condition is false, a message is printed to the compiler output and the debugger is triggered.
 	// Example: EDGE_ASSERT(ptr != nullptr, "Pointer cannot be null!");
-	// Note: The message part is currently for show; a real logging system would be needed to print it.
 #define EDGE_ASSERT(condition, ...) \
 		do { \
 			if (!(condition)) { \
